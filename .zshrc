@@ -55,30 +55,6 @@ promptinit
 PROMPT='%m:%F{green}%~ $ %f%>:%{\e[0m% $}'
 #RPROMPT="[%{$fg[yellow]%}%?%{$reset_color%}]"
 
-# For KDE environment change
-function cd() {
-  # Use this for zsh (otherwise just "cd" doesn't work) :
-  builtin cd $*
-  _f=`findup .setup`
-  if test -n "$_f" -a "$_lastf" != "$_f"; then
-    echo "Loading KDE Developer Environment - $_f"
-    _lastf="$_f"
-    source $_f/my_setup
-    source $_f/kde_setup
-  fi
-}
-
-function pb {
-    URL=`pastebinit $@`
-    echo $URL | c
-    echo $URL
-}
-
-function f() {
-    find -iname "*$@*"
-    return $?
-}
-
 # Colored autocompletion for files
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors 'reply=( "=(#b)(*$VAR)(?)*=00=$color[green]=$color[bg-green]" )'
@@ -147,8 +123,3 @@ zstyle ":completion:*:commands" rehash 1
 # direnv
 eval "$(direnv hook zsh)"
 
-# Focus Writer
-function journal() {
-    touch ~/Documents/notes/`date +%Y-%m-%d`.txt
-    focuswriter ~/Documents/notes/`date +%Y-%m-%d`.txt
-}
