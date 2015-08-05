@@ -68,54 +68,12 @@ function cd() {
   fi
 }
 
-# Custom Aliases
-alias ..='cd ../'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-alias .....='cd ../../../../'
-
-# Color
-alias diff='colordiff'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias more='less'
-alias ls='ls --color=auto'
-alias ll='ls -lh'
-
-# Convenient shortcuts
-alias v='vim'
-alias k='kwrite &> /dev/null'
-alias g='grep -i'
-alias a='ack -ir'
-
-alias h='head'
-alias t='tail'
-
-# Git aliases
-alias gs='git status'
-alias gsf='git status --uno'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gl='git log'
-alias ga='git add'
-alias gb='git branch'
-alias gbc='git branch -a --contains'
-alias gap='git add -p'
-alias gc='git commit -v'
-alias gca='git commit --amend -v'
-alias gsh='git show'
-alias gss='git stash save'
-
-alias c='xclip -selection clipboard'
-alias kd='kdevelop'
-
 function pb {
     URL=`pastebinit $@`
     echo $URL | c
     echo $URL
 }
 
-# Find alias
 function f() {
     find -iname "*$@*"
     return $?
@@ -137,7 +95,6 @@ export EDITOR='vim'
 # eval $(gpg-agent --daemon)
 
 eval $(keychain --noask --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)
-
 
 # Zsh completion cache
 zstyle ':completion:*' use-cache on
@@ -165,9 +122,6 @@ bindkey '^[l' forward-char
 # An improved backward search
 bindkey "\C-r" history-incremental-pattern-search-backward
 
-# Chromium + Tor
-alias chromium-tor='chromium --proxy-server="socks://localhost:9050"'
-
 # 256 color terminal
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
         export TERM='xterm-256color'
@@ -175,25 +129,17 @@ else
         export TERM='xterm-color'
 fi
 
-alias ws='watch -n 0.5 sensors'
-
 # Auto call 'ls' after cd
 function chpwd() {
     emulate -L zsh
     ls
 }
 
-# Annoying gdb copyright message
-alias gdb='gdb -q'
-
 # Ruby
 export PATH=~/.gem/ruby/2.1.0/bin:$PATH
 
 # Choose Qt version 5
 QT_SELECT=5
-
-# What is this bd thing?
-alias bd=". bd -s"
 
 # Rebuild PATH cache
 zstyle ":completion:*:commands" rehash 1

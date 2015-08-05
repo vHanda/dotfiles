@@ -1,0 +1,53 @@
+# 
+# Aliases
+#
+
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+
+# Color
+alias diff='colordiff'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias more='less'
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+
+# Convenient shortcuts
+alias v='vim'
+alias k='kwrite &> /dev/null'
+alias g='grep -i'
+alias a='ack -ir'
+
+alias h='head'
+alias t='tail'
+
+# Git aliases
+alias gs='git status'
+alias gsf='git status --uno'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gl='git log'
+alias ga='git add'
+alias gb='git branch'
+alias gbc='git branch -a --contains'
+alias gap='git add -p'
+alias gc='git commit -v'
+alias gca='git commit --amend -v'
+alias gsh='git show'
+alias gss='git stash save'
+
+alias c='xclip -selection clipboard'
+alias kd='kdevelop'
+
+# To see if my system is heating up
+alias ws='watch -n 0.5 sensors'
+
+# Annoying gdb copyright message
+alias gdb='gdb -q'
+
+# What is this bd thing?
+alias bd=". bd -s"
+
