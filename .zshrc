@@ -1,4 +1,7 @@
 for DOTFILE in `find ~/.dotfiles -maxdepth 1 -type f`
 do
-  source "$DOTFILE"
+  ZSHRC=~/.dotfiles/.zshrc
+  if [[ "$DOTFILE" != "$ZSHRC" ]]; then
+      source "$DOTFILE"
+  fi
 done
