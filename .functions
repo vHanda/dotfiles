@@ -27,6 +27,14 @@ function f() {
     return $?
 }
 
+# Replace
+function rp() {
+    FROM=$1
+    TO=$2
+    echo "Replacing $1 for $2";
+    find . -type f -not -path './node_modules/*' -not -path '*/\.*' -exec sed -i -e s/$FROM/$TO/g {} \;
+}
+
 # Focus Writer
 function journal() {
     touch ~/Documents/notes/`date +%Y-%m-%d`.txt
