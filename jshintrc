@@ -1,9 +1,6 @@
 {
   "curly": true,
   "undef": true,
-  "globals": {
-    "require": true,
-    "console": true,
-    "module": true
-  }
+  "browser": false,
+  "node": true
 }
