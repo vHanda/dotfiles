@@ -1,0 +1,8 @@
+'body':
+  'ctrl-alt-l': 'pane:show-next-item'
+  'ctrl-alt-h': 'pane:show-previous-item'
+  'ctrl-q': 'core:close'
+'atom-text-editor':
+  'ctrl-alt-h': 'pane:show-previous-item'
+'atom-text-editor.vim-mode.normal-mode':
+  'ctrl-r': 'symbols-view:toggle-file-symbols'
