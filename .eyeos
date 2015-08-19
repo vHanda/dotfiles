@@ -66,9 +66,14 @@ function db {
 function dr {
     WD=`pwd`
     cd /home/eyeos/src/eyeos-single-node-fig/lib/ &> /dev/null
-    docker-compose kill $@
-    docker-compose rm --force $@
-    docker-compose up -d $@
+
+    CONT=$@
+    if [[ -z $CONT ]]; then
+	CONT=`dps | tail -n +2 | fzf | sed 's/lib_//' | sed 's/_1//'`
+    fi
+    docker-compose kill $CONT
+    docker-compose rm --force $CONT
+    docker-compose up -d $CONT
     cd $WD &> /dev/null
 }
 
