@@ -8,7 +8,7 @@ function dk {
         docker kill $CONT
     elif [[ -z $CONT ]]
     then
-	docker kill `dps | tail -n +2 | fzf`
+	docker kill `dps | fzf`
     else
         CONT+=_1
         docker kill "lib_$CONT"
@@ -22,7 +22,7 @@ function dl {
         docker logs $CONT
     elif [[ -z $CONT ]]
     then
-	docker logs `dps | tail -n +2 | fzf`
+	docker logs `dps | fzf`
     else
         CONT+=_1
         docker logs "lib_$CONT"
@@ -32,9 +32,9 @@ function dl {
 function dps {
     if [ -z "$@" ]
     then
-	    docker ps | awk '{ print $NF }' 
+	    docker ps | awk '{ print $NF }' | tail -n +2
     else
-	    docker ps | awk '{ print $NF }' | grep --color=always -i $@
+	    docker ps | awk '{ print $NF }' | tail -n +2 | grep --color=always -i $@
     fi
 }
 
@@ -45,7 +45,7 @@ function de {
         docker exec -ti $CONT bash
     elif [[ -z $CONT ]]
     then
-	docker exec -ti `dps | tail -n +2 | fzf` bash
+	docker exec -ti `dps | fzf` bash
     else
         CONT+=_1
         docker exec -ti "lib_$CONT" bash
@@ -69,7 +69,7 @@ function dr {
 
     CONT=$@
     if [[ -z $CONT ]]; then
-	CONT=`dps | tail -n +2 | fzf | sed 's/lib_//' | sed 's/_1//'`
+	CONT=`dps | fzf | sed 's/lib_//' | sed 's/_1//'`
     fi
     docker-compose kill $CONT
     docker-compose rm --force $CONT
