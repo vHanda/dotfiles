@@ -1,32 +1,21 @@
+#!/bin/bash
+
 #
 # Docker
 #
 function dk {
-    CONT=$@
-    if [[ $CONT == lib_* ]]
-    then
-        docker kill $CONT
-    elif [[ -z $CONT ]]
-    then
-	docker kill `dps | fzf`
-    else
-        CONT+=_1
-        docker kill "lib_$CONT"
-    fi
+    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    docker kill $CONTAINER
 }
 
 function dl {
-    CONT=$@
-    if [[ $CONT == lib_* ]]
-    then
-        docker logs $CONT
-    elif [[ -z $CONT ]]
-    then
-	docker logs `dps | fzf`
-    else
-        CONT+=_1
-        docker logs "lib_$CONT"
-    fi
+    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    docker logs $CONTAINER
+}
+
+function dlf {
+    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    docker logs -f $CONTAINER
 }
 
 function dps {
@@ -39,17 +28,8 @@ function dps {
 }
 
 function de {
-    CONT=$@
-    if [[ $CONT == lib_* ]]
-    then
-        docker exec -ti $CONT bash
-    elif [[ -z $CONT ]]
-    then
-	docker exec -ti `dps | fzf` bash
-    else
-        CONT+=_1
-        docker exec -ti "lib_$CONT" bash
-    fi
+    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    docker exec -ti $CONTAINER bash
 }
 
 function db {
@@ -67,13 +47,14 @@ function dr {
     WD=`pwd`
     cd /home/eyeos/src/eyeos-single-node-fig/lib/ &> /dev/null
 
-    CONT=$@
+    CONT=`dps | fzf -q $@ -1 -0 | sed 's/lib_//' | sed 's/_1//'`
     if [[ -z $CONT ]]; then
-	CONT=`dps | fzf | sed 's/lib_//' | sed 's/_1//'`
+	return
     fi
     docker-compose kill $CONT
     docker-compose rm --force $CONT
     docker-compose up -d $CONT
+
     cd $WD &> /dev/null
 }
 
