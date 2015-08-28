@@ -3,18 +3,28 @@
 #
 # Docker
 #
+function getContainerName() {
+    if [[ -z $@ ]]; then
+        CONTAINER=`dps | fzf`
+    else
+        CONTAINER=`dps | fzf -1 -q $@`
+    fi
+
+    echo $CONTAINER
+}
+
 function dk {
-    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    CONTAINER=`getContainerName $@`
     docker kill $CONTAINER
 }
 
 function dl {
-    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    CONTAINER=`getContainerName $@`
     docker logs $CONTAINER
 }
 
 function dlf {
-    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    CONTAINER=`getContainerName $@`
     docker logs -f $CONTAINER
 }
 
@@ -28,7 +38,7 @@ function dps {
 }
 
 function de {
-    CONTAINER=`dps | fzf -1 -0 -q $@` 
+    CONTAINER=`getContainerName $@`
     docker exec -ti $CONTAINER bash
 }
 
@@ -47,7 +57,7 @@ function dr {
     export COMPOSE_FILE='/home/eyeos/src/eyeos-cli/environments/compose_files/docker-compose.latest.yml'
     export COMPOSE_PROJECT_NAME='eyeos'
 
-    CONT=`dps | fzf -q $@ -1 -0 | sed 's/eyeos_//' | sed 's/_1//'`
+    CONT=`getContainerName $@ | sed 's/eyeos_//' | sed 's/_1//'`
     if [[ -z $CONT ]]; then
 	return
     fi
