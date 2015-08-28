@@ -44,18 +44,16 @@ function db {
 
 # Restart a container
 function dr {
-    WD=`pwd`
-    cd /home/eyeos/src/eyeos-single-node-fig/lib/ &> /dev/null
+    export COMPOSE_FILE='/home/eyeos/src/eyeos-cli/environments/compose_files/docker-compose.latest.yml'
+    export COMPOSE_PROJECT_NAME='eyeos'
 
-    CONT=`dps | fzf -q $@ -1 -0 | sed 's/lib_//' | sed 's/_1//'`
+    CONT=`dps | fzf -q $@ -1 -0 | sed 's/eyeos_//' | sed 's/_1//'`
     if [[ -z $CONT ]]; then
 	return
     fi
     docker-compose kill $CONT
     docker-compose rm --force $CONT
-    docker-compose up -d $CONT
-
-    cd $WD &> /dev/null
+    docker-compose up --no-deps -d $CONT
 }
 
 # Stop all containers
