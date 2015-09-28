@@ -1,6 +1,13 @@
 {
   "curly": true,
   "undef": true,
+  "eqeqeq": true,
   "browser": false,
-  "node": true
+  "node": true,
+  "globals": {
+    "suite": true,
+    "test": true,
+    "teardown": true,
+    "setup": true
+  }
 }
