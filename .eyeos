@@ -54,7 +54,7 @@ function db {
 
 # Restart a container
 function dr {
-    export COMPOSE_FILE='/home/eyeos/src/eyeos-cli/environments/compose_files/docker-compose.latest.yml'
+    export COMPOSE_FILE='/home/eyeos/src/eyeos-cli/environments/compose_files/latest/docker-compose-all.yml'
     export COMPOSE_PROJECT_NAME='eyeos'
 
     CONT=`getContainerName $@ | sed 's/eyeos_//' | sed 's/_1//'`
