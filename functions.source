@@ -37,6 +37,12 @@ function rp() {
 
 # Focus Writer
 function journal() {
-    touch ~/Documents/notes/`date +%Y-%m-%d`.txt
-    focuswriter ~/Documents/notes/`date +%Y-%m-%d`.txt
+    FILE="$HOME/Documents/notes/`date +%Y-%m-%d`.txt"
+    touch $FILE
+
+    echo `date '+%R %Z (%z)'` >> $FILE
+    echo '------------------' >> $FILE
+    echo >> $FILE
+
+    focuswriter $FILE
 }
