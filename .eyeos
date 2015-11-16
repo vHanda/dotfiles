@@ -72,3 +72,7 @@ dkill-all() { docker kill $(docker ps -a -q); }
 
 # Remove all containers
 drm-all() { docker rm $(docker ps -a -q); }
+
+# Execute component-tests
+ec() { ./node_modules/.bin/execute-component-tests }
+
