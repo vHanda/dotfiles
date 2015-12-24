@@ -78,7 +78,7 @@ ec() { ./node_modules/.bin/execute-component-tests }
 
 vms() {
     echo "------ Broker Pools --------"
-    mongo broker --quiet --eval 'db.pools.find().pretty().forEach(function(x){printjson(x);})'
+    mongo broker --quiet --eval 'db.pools.find().pretty().forEach(printjson)'
     echo "------ VMAssignation --------"
-    mongo eyeos --quiet --eval 'db.VirtualMachineAssignation.find().forEach(function(x){printjson(x);})'
+    mongo eyeos --quiet --eval 'db.VirtualMachineAssignation.find().forEach(printjson)'
 }
