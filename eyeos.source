@@ -84,14 +84,14 @@ vms() {
 }
 
 eyeos-npm-install() {
-    docker run --rm -ti -e USER=$USER -e USERID=$UID \
+    docker run --rm -ti \
                -v $PWD:/code \
                docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
                sh -c 'cd /code && npm install'
 }
 
 eyeos-run-tests() {
-    docker run --rm -ti -e USER=$USER -e USERID=$UID \
+    docker run --rm -ti \
                -v $PWD:/code \
                docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
                /code/node_modules/.bin/mocha -u tdd /code/src/test/
