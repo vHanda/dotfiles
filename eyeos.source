@@ -96,6 +96,7 @@ erc() {
 
 eni() {
     erc 'npm install'
+    erc 'chown -R 1000 node_modules'
 }
 
 em() {
