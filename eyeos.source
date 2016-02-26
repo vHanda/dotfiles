@@ -88,10 +88,14 @@ vms() {
 # This runs that command in the correct docker environment
 #
 erc() {
+    CMD=$@
+    if [ -z $CMD ]; then
+        CMD='bash'
+    fi
     docker run --rm -ti \
                -v $PWD:/code \
                docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
-               sh -c "cd /code && $@"
+               sh -c "cd /code && $CMD"
 }
 
 eni() {
