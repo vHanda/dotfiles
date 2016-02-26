@@ -83,16 +83,21 @@ vms() {
     mongo eyeos --quiet --eval 'db.VirtualMachineAssignation.find().forEach(printjson)'
 }
 
-eyeos-npm-install() {
+#
+# Run an "eyeos" command
+# This runs that command in the correct docker environment
+#
+erc() {
     docker run --rm -ti \
                -v $PWD:/code \
                docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
-               sh -c 'cd /code && npm install'
+               sh -c "cd /code && $@"
 }
 
-eyeos-run-tests() {
-    docker run --rm -ti \
-               -v $PWD:/code \
-               docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
-               /code/node_modules/.bin/mocha -u tdd /code/src/test/
+eni() {
+    erc 'npm install'
+}
+
+em() {
+    erc "./node_modules/.bin/mocha -u tdd $@"
 }
