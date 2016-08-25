@@ -20,6 +20,7 @@ alias v='vim'
 alias k='kwrite &> /dev/null'
 alias g='grep -i'
 alias a='ack -ir'
+alias d='docker'
 
 alias h='head'
 alias t='tail'
