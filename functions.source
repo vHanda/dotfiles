@@ -2,19 +2,6 @@
 # Functions
 #
 
-# For KDE environment change
-function cd() {
-  # Use this for zsh (otherwise just "cd" doesn't work) :
-  builtin cd $*
-  _f=`findup .setup`
-  if test -n "$_f" -a "$_lastf" != "$_f"; then
-    echo "Loading KDE Developer Environment - $_f"
-    _lastf="$_f"
-    source $_f/my_setup
-    source $_f/kde_setup
-  fi
-}
-
 # Pastebin
 function pb {
     URL=`pastebinit $@`
