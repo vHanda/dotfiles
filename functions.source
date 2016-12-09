@@ -33,3 +33,8 @@ function journal() {
 
     focuswriter $FILE
 }
+
+# For formatting numbers
+function format() {
+    sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'
+}
