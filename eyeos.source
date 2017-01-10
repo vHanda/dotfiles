@@ -42,67 +42,9 @@ function de {
     docker exec -ti $CONTAINER bash
 }
 
-function db {
-    NAME=`cat docker/NAME`
-    if [ -z "$NAME" ]
-    then
-	    docker build .
-    else
-	    docker build -t $NAME .
-    fi
-}
-
-# Restart a container
-function dr {
-    export COMPOSE_FILE='/home/eyeos/src/eyeos-cli/environments/compose_files/latest/docker-compose-all.yml'
-    export COMPOSE_PROJECT_NAME='eyeos'
-
-    CONT=`getContainerName $@ | sed 's/eyeos_//' | sed 's/_1//'`
-    if [[ -z $CONT ]]; then
-	return
-    fi
-    docker-compose kill $CONT
-    docker-compose rm --force $CONT
-    docker-compose up --no-deps -d $CONT
-}
-
 # Stop all containers
 dstop-all() { docker stop $(docker ps -a -q); }
 dkill-all() { docker kill $(docker ps -a -q); }
 
 # Remove all containers
 drm-all() { docker rm $(docker ps -a -q); }
-
-# Execute component-tests
-ec() { ./node_modules/.bin/execute-component-tests }
-
-vms() {
-    echo "------ Broker Pools --------"
-    mongo broker --quiet --eval 'db.pools.find().pretty().forEach(printjson)'
-    echo "------ VMAssignation --------"
-    mongo eyeos --quiet --eval 'db.VirtualMachineAssignation.find().forEach(printjson)'
-}
-
-#
-# Run an "eyeos" command
-# This runs that command in the correct docker environment
-#
-erc() {
-    CMD=$@
-    if [ -z $CMD ]; then
-        CMD='bash'
-    fi
-    docker run --rm -ti \
-               -v $PWD:/code \
-               docker-registry.eyeosbcn.com/eyeos-fedora21-node-base \
-               sh -c "cd /code && $CMD"
-}
-
-eni() {
-    erc 'npm install'
-    erc 'chown -R 1000 node_modules'
-}
-
-em() {
-    erc "./node_modules/.bin/mocha -u tdd $@"
-}
