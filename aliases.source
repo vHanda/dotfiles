@@ -19,7 +19,7 @@ alias ll='ls -lh'
 alias v='vim'
 alias k='kwrite &> /dev/null'
 alias g='grep -i'
-alias a='ack -ir'
+alias a='ag -i'
 alias d='docker'
 
 alias h='head'
