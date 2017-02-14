@@ -24,6 +24,7 @@ alias d='docker'
 
 alias h='head'
 alias t='tail'
+alias wl='wc -l'
 
 # Git aliases
 alias gs='git status'
