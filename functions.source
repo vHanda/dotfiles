@@ -24,14 +24,29 @@ function rp() {
 
 # Focus Writer
 function journal() {
-    FILE="$HOME/Documents/notes/`date +%Y-%m-%d`.txt"
-    touch $FILE
+    TIME=`date --iso-8601=seconds`
+    FILE="$HOME/notes/Journal/$TIME.md"
+    touch "$FILE"
 
-    echo `date '+%R %Z (%z)'` >> $FILE
-    echo '------------------' >> $FILE
+    echo '---' >> $FILE
+    echo 'type: Journal' >> $FILE
+    echo "created: $TIME" >> $FILE
+    echo '---' >> $FILE
     echo >> $FILE
 
-    focuswriter $FILE
+    focuswriter "$FILE"
+    if python ~/src/notes/is_empty.py $FILE ; then
+        rm "$FILE"
+        return
+    fi
+
+    cd ~/notes/ &> /dev/null
+    git add "$FILE"
+    COMMIT_FILE=/tmp/journal-commit-msg
+    echo 'New Journal Entry' > $COMMIT_FILE
+    git commit -F $COMMIT_FILE
+    rm $COMMIT_FILE
+    cd - &> /dev/null
 }
 
 # For formatting numbers
