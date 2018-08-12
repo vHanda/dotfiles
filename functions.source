@@ -34,7 +34,12 @@ function journal() {
     echo '---' >> $FILE
     echo >> $FILE
 
-    focuswriter "$FILE"
+    if which focuswriter &> /dev/null ; then
+        focuswriter "$FILE"
+    else
+        /Applications/FocusWriter.app/Contents/MacOS/FocusWriter "$FILE"
+    fi
+
     if python ~/src/notes/is_empty.py $FILE ; then
         rm "$FILE"
         return
