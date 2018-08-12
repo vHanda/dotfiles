@@ -20,12 +20,12 @@ function dk {
 
 function dl {
     CONTAINER=`getContainerName $@`
-    docker logs $CONTAINER
+    docker logs --tail=500 $CONTAINER
 }
 
 function dlf {
     CONTAINER=`getContainerName $@`
-    docker logs -f $CONTAINER
+    docker logs --tail=500 -f $CONTAINER
 }
 
 function dps {
