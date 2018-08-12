@@ -7,4 +7,5 @@ ln -s ${BASEDIR}/vimrc ~/.vimrc
 # ln -s ${BASEDIR}/vim/ ~/.vim
 
 # zsh
+mkdir ~/.zsh
 ln -s ${BASEDIR}/zshrc ~/.zshrc
