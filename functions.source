@@ -10,7 +10,7 @@ function pb {
 }
 
 function f() {
-    find -iname "*$@*"
+    find . -iname "*$@*"
     return $?
 }
 
