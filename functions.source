@@ -9,11 +9,6 @@ function pb {
     echo $URL
 }
 
-function f() {
-    find . -iname "*$@*"
-    return $?
-}
-
 # Replace
 function rp() {
     FROM=$1
