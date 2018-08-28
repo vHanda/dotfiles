@@ -41,15 +41,11 @@ alias gca='git commit --amend -v'
 alias gsh='git show'
 alias gss='git stash save'
 
-alias c='xclip -selection clipboard'
-alias kd='kdevelop'
-
 # To see if my system is heating up
 alias ws='watch -n 0.5 sensors'
 
 # Annoying gdb copyright message
 alias gdb='gdb -q'
 
-# What is this bd thing?
-alias bd=". bd -s"
+alias cat='bat --paging never --style=plain'
 
