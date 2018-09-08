@@ -40,13 +40,9 @@ imap <S-Tab> <Esc><<i
 set nobackup " No backup~ files
 
 set history=100   " remember 100 lines of command history
-set mouse=v       " use mouse in visual mode 
-
-"let g:loaded_matchparen= 1 " The annoying matching bracket thing
 
 " Color Scheme
 "set t_Co=256
-colorscheme lettuce
 
 set fillchars=vert:\ ,fold:\ " <- trailing space
 
@@ -65,14 +61,8 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-" Pathogen
-call pathogen#infect()
 syntax on
 filetype plugin indent on
-
-" SuperTab
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
 
 " Leader
 let mapleader = ","
@@ -80,9 +70,6 @@ let mapleader = ","
 " Remap ` and ' for marks
 nnoremap ' `
 nnoremap ` '
-
-" Faster saving and all
-" nnoremap ; :
 
 set title
 
@@ -92,20 +79,9 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-"set shell=/bin/zsh\ -i
-set mp=makeobj
-set mouse=a
-
-" Switch to alternate file
-map <C-Tab> :bnext<cr>
-map <C-S-Tab> :bprevious<cr>
-
 " Map Ctrl-A -> Start of line, Ctrl-E -> End of line
 :map <C-a> <Home>
 :map <C-e> <End>
-
-" For header source switch
-map ,a :A<CR>
 
 " map control-backspace to delete the previous word
 :imap <C-BS> <C-W>
