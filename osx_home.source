@@ -4,14 +4,7 @@ if [ ! -d "/Users/vishesh" ]; then
     exit
 fi
 
-# For MAC
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="/usr/local/opt/qt/bin:$PATH"
-
-export CMAKE_PREFIX_PATH=/usr/local/Cellar/cmake/3.8.0/share/cmake/:/usr/local/Cellar/kf5-extra-cmake-modules/5.32.0/share/ECM/:/usr/local/opt/qt/lib/cmake
-
-export PATH="$HOME/.fastlane/bin:$PATH"
-
+# Golang
 export GOPATH=$HOME/src/go
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=$PATH:$GOPATH/bin
