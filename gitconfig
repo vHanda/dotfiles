@@ -1,0 +1,9 @@
+[user]
+	name = Vishesh Handa
+	email = vishesh.handa@telefonica.com
+
+[alias]
+	co = checkout
+	chp = cherry-pick
+[core]
+	excludesfile = ~/.gitignore
