@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "/Users/yc00062" ]; then
-    exit
+    return
 fi
 
 # OSX Only
