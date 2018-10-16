@@ -17,3 +17,8 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Hom
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=${PATH}:/Users/yc00062/Library/Python/3.7/bin
 export GOPATH=/Users/yc00062/go
+
+export PATH=/Users/yc00062/Library/Python/3.6/bin/:${PATH}
+
+alias assume-role='function(){eval $(command assume-role $@);}'
+
