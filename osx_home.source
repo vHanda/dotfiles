@@ -19,3 +19,6 @@ export PATH=~/src/flutter/flutter/bin:$PATH
 
 export PATH=/Users/vishesh/Library/Android/sdk/platform-tools:$PATH
 export PATH=/Users/vishesh/Library/Android/sdk/tools/bin:$PATH
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
