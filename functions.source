@@ -53,3 +53,7 @@ function journal() {
 function format() {
     sed ':a;s/\B[0-9]\{3\}\>/,&/;ta'
 }
+
+function mk() {
+    mkdir -p $1 && cd &1
+}
