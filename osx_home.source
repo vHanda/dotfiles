@@ -22,3 +22,5 @@ export PATH=/Users/vishesh/Library/Android/sdk/tools/bin:$PATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+export PATH="$HOME/.fastlane/bin:$PATH"
