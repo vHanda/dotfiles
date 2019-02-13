@@ -17,10 +17,17 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=~/src/flutter/flutter/bin:$PATH
 
-export PATH=/Users/vishesh/Library/Android/sdk/platform-tools:$PATH
-export PATH=/Users/vishesh/Library/Android/sdk/tools/bin:$PATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 export PATH="$HOME/.fastlane/bin:$PATH"
+export NDK="$HOME/Library/Android/sdk/ndk-bundle"
+
+export PATH="$HOME/src/flutter/flutter/bin/cache/dart-sdk/bin:$PATH"
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export ANDROID_AVD_HOME=$HOME/.android/avd
+export PATH=$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH
+export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
