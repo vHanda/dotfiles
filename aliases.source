@@ -50,3 +50,5 @@ alias gdb='gdb -q'
 
 alias cat='bat --paging never --style=plain --wrap never'
 
+# Kubernetes
+alias k='kubectl'
