@@ -40,6 +40,7 @@ alias gc='git commit -v'
 alias gca='git commit --amend -v'
 alias gsh='git show'
 alias gss='git stash save'
+alias gcb='git checkout -b'
 
 # To see if my system is heating up
 alias ws='watch -n 0.5 sensors'
