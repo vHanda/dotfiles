@@ -57,3 +57,14 @@ function format() {
 function mk() {
     mkdir -p "$1" && cd "$1"
 }
+
+# Go run
+function gr() {
+    EXE_NAME=`basename $PWD`
+    time go build
+    if [ $? -eq 0 ]; then
+    else
+        return
+    fi
+    ./"$EXE_NAME"
+}
