@@ -64,6 +64,7 @@ function gr() {
     time go build
     if [ $? -eq 0 ]; then
     else
+        osascript -e "display notification \"Build Failed\" with title \"$EXE_NAME\""
         return
     fi
     ./"$EXE_NAME"
