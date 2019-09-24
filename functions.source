@@ -59,8 +59,20 @@ function mk() {
 }
 
 # Go run
-function gr() {
+function gr() (
+    COUNT=`ls -1 *.go 2>/dev/null | wc -l`
+    if [[ $COUNT == 0 ]]; then
+        if [ -d "cmd" ]; then
+            cd "cmd/consumer"
+        else
+            echo "Could not find go files"
+            return
+        fi
+    fi
+
+    pwd
     EXE_NAME=`basename $PWD`
+
     time go build
     if [ $? -eq 0 ]; then
     else
@@ -68,4 +80,4 @@ function gr() {
         return
     fi
     ./"$EXE_NAME"
-}
+)
