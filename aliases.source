@@ -17,7 +17,6 @@ alias ll='ls -lh'
 
 # Convenient shortcuts
 alias v='vim'
-alias k='kwrite &> /dev/null'
 alias g='grep -i'
 alias a='ag -i'
 alias d='docker'
@@ -52,3 +51,4 @@ alias cat='bat --paging never --style=plain --wrap never'
 
 # Kubernetes
 alias k='kubectl'
+alias kvt='kubectl -n=vehicle-technology'
