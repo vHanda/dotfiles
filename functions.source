@@ -81,3 +81,27 @@ function gr() (
     fi
     ./"$EXE_NAME"
 )
+
+function getTestNames() {
+    if [[ -z $@ ]]; then
+        FILE_NAME=`fd '.*_test.dart' | fzf`
+    else
+        FILE_NAME=`fd '.*_test.dart' | fzf -1 -q $@`
+    fi
+
+    echo $FILE_NAME
+}
+
+function dt {
+    TEST_FILE=`getTestNames $@`
+    echo "dart test $TEST_FILE"
+    print -s "dart test $TEST_FILE"
+    dart test "$TEST_FILE"
+}
+
+function ft {
+    TEST_FILE=`getTestNames $@`
+    echo "flutter test $TEST_FILE"
+    print -s "flutter test $TEST_FILE"
+    flutter test "$TEST_FILE"
+}
