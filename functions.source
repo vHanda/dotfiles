@@ -94,6 +94,9 @@ function getTestNames() {
 
 function dt {
     TEST_FILE=`getTestNames $@`
+    if [[ -z "$TEST_FILE" ]]; then
+        return
+    fi
     echo "dart test $TEST_FILE"
     print -s "dart test $TEST_FILE"
     dart test "$TEST_FILE"
@@ -101,6 +104,9 @@ function dt {
 
 function ft {
     TEST_FILE=`getTestNames $@`
+    if [[ -z "$TEST_FILE" ]]; then
+        return
+    fi
     echo "flutter test $TEST_FILE"
     print -s "flutter test $TEST_FILE"
     flutter test "$TEST_FILE"
