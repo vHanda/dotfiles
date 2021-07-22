@@ -111,3 +111,7 @@ function ft {
     print -s "flutter test $TEST_FILE"
     flutter test "$TEST_FILE"
 }
+
+function yt() {
+    youtube-dl "$1" -f 'bestvideo[ext!=webm][width<=2560]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mp4
+}
