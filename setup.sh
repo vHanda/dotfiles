@@ -9,3 +9,5 @@ ln -s ${BASEDIR}/vimrc ~/.vimrc
 # zsh
 mkdir ~/.zsh
 ln -s ${BASEDIR}/zshrc ~/.zshrc
+
+ln -s ${BASEDIR}/gitconfig ~/.gitconfig
