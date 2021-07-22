@@ -1,0 +1,43 @@
+#!/bin/bash
+
+alias k='kubectl'
+alias kvt='kubectl -n=vehicle-technology'
+alias kof='kubectl -n=one-connected-fleet'
+
+function kof-pods() {
+    kof get pods | tail -n +2 | awk '{ print $1 }'
+}
+
+function kof-get-podname() {
+    if [[ -z $@ ]]; then
+        CONTAINER=$(kof-pods | fzf)
+    else
+        CONTAINER=$(kof-pods | fzf -1 -q $@)
+    fi
+
+    echo "$CONTAINER"
+}
+
+function kof-pod-logs() {
+    POD=$(kof-get-podname $@)
+    kof logs -f "$POD"
+}
+
+function kof-app-labels() {
+    kof get pods --show-labels | tail -n +2 | awk '{ print $6 }' | awk -F, '{ print $1 }' | grep 'app=' | awk -F= '{ print $2 }' | sort | uniq
+}
+
+function kof-get-app-label() {
+    if [[ -z $@ ]]; then
+        CONTAINER=$(kof-app-labels | fzf)
+    else
+        CONTAINER=$(kof-app-labels | fzf -1 -q "$@")
+    fi
+
+    echo "$CONTAINER"
+}
+
+function kof-logs() {
+    APP=$(kof-get-app-label "$@")
+    kof logs -f -l app="$APP"
+}
