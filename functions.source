@@ -117,9 +117,8 @@ function yt() {
 }
 
 function vdek {
-    new_home="/home/vishesh"
-    old_home="/Users/vishesh"
-    new_dir="${pwd/}"
-    result=$(pwd | sed "s#$old_home#$new_home#")
-    ssh vdek -t "cd $result; zsh --login"
+    old_home="$HOME"
+    new_dir="$(pwd)"
+    result=$(pwd | sed "s#$old_home##")
+    ssh vdek -t "cd \$HOME$result; exec \$SHELL --login"
 }
