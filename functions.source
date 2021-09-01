@@ -115,3 +115,11 @@ function ft {
 function yt() {
     youtube-dl "$1" -f 'bestvideo[ext!=webm][width<=2560]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mp4
 }
+
+function vdek {
+    new_home="/home/vishesh"
+    old_home="/Users/vishesh"
+    new_dir="${pwd/}"
+    result=$(pwd | sed "s#$old_home#$new_home#")
+    ssh vdek -t "cd $result; zsh --login"
+}
