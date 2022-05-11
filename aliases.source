@@ -21,8 +21,6 @@ alias g='grep -i'
 alias a='ag -i'
 alias d='docker'
 
-alias h='head'
-alias t='tail'
 alias wl='wc -l'
 
 # Git aliases
