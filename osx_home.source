@@ -12,9 +12,6 @@ export PATH=$PATH:$GOPATH/bin
 
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 export PATH=~/src/flutter/flutter/bin:$PATH
 
 
@@ -31,5 +28,12 @@ export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export ANDROID_AVD_HOME=$HOME/.android/avd
 export PATH=$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+# dart pub
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH":"$HOME/.cargo/bin"
+
+# Ruby
+export PATH="/usr/local/opt/ruby/bin":"$PATH"
+export PATH="/usr/local/lib/ruby/gems/3.0.0/bin":"$PATH"
+export PATH="/Users/vishesh/.gem/ruby/3.0.0/bin":"$PATH"
