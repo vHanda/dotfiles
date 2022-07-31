@@ -117,6 +117,7 @@ function yt() {
 }
 
 function vdek {
+    wakeonlan fc:aa:14:30:8a:7c &> /dev/null
     old_home="$HOME"
     new_dir="$(pwd)"
     result=$(pwd | sed "s#$old_home##")
