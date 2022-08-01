@@ -38,6 +38,8 @@ alias gca='git commit --amend -v'
 alias gp='git push origin master'
 alias gpf='git push origin master --force'
 
+alias cls='printf "\033c"'
+
 # To see if my system is heating up
 alias ws='watch -n 0.5 sensors'
 
