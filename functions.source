@@ -123,3 +123,19 @@ function vdek {
     result=$(pwd | sed "s#$old_home##")
     ssh vdek -t "cd \$HOME$result; exec \$SHELL --login"
 }
+
+function fr() {
+    if [[ -f ./scripts/flutter_run.sh ]]; then
+        ./scripts/flutter_run.sh "$@"
+    else
+        ./flutterw run "$@"
+    fi
+}
+
+#function _flutter() {
+#    if [[ -f ./flutterw ]]; then
+#        ./flutterw "$@"
+#    else
+#        flutter run "$@"
+#    fi
+#}
