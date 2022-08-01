@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -d "/home/vishesh" ]; then
+    return
+fi
+
+PROMPT='%F{yellow}%~ $ %f%>:%{\e[0m% $}'
+alias open='xdg-open'
