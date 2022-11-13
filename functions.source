@@ -2,13 +2,6 @@
 # Functions
 #
 
-# Pastebin
-function pb {
-    URL=`pastebinit $@`
-    echo $URL | c
-    echo $URL
-}
-
 # Replace
 function rp() {
     FROM=$1
@@ -33,11 +26,6 @@ function journal() {
         focuswriter "$FILE"
     else
         /Applications/FocusWriter.app/Contents/MacOS/FocusWriter "$FILE"
-    fi
-
-    if python ~/src/notes/is_empty.py $FILE ; then
-        rm "$FILE"
-        return
     fi
 
     cd ~/notes/ &> /dev/null
@@ -131,11 +119,3 @@ function fr() {
         ./flutterw run "$@"
     fi
 }
-
-#function _flutter() {
-#    if [[ -f ./flutterw ]]; then
-#        ./flutterw "$@"
-#    else
-#        flutter run "$@"
-#    fi
-#}
