@@ -6,3 +6,13 @@ fi
 
 PROMPT='%F{yellow}%~ $ %f%>:%{\e[0m% $}'
 alias open='xdg-open'
+
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# For Flutter
+export CHROME_EXECUTABLE=google-chrome-stable
+export ANDROID_HOME="$HOME/Android"
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export PATH="$PATH":/opt/android-sdk/cmdline-tools/latest-2/bin
+export PATH="$PATH":/opt/android-sdk/cmdline-tools/latest/bin
+export PATH="$PATH":/opt/android-sdk/platform-tools
