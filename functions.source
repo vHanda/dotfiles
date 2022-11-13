@@ -70,35 +70,6 @@ function gr() (
     ./"$EXE_NAME"
 )
 
-function getTestNames() {
-    if [[ -z $@ ]]; then
-        FILE_NAME=`fd '.*_test.dart' | fzf`
-    else
-        FILE_NAME=`fd '.*_test.dart' | fzf -1 -q $@`
-    fi
-
-    echo $FILE_NAME
-}
-
-function dt {
-    TEST_FILE=`getTestNames $@`
-    if [[ -z "$TEST_FILE" ]]; then
-        return
-    fi
-    echo "dart test $TEST_FILE"
-    print -s "dart test $TEST_FILE"
-    dart test "$TEST_FILE"
-}
-
-function ft {
-    TEST_FILE=`getTestNames $@`
-    if [[ -z "$TEST_FILE" ]]; then
-        return
-    fi
-    echo "flutter test $TEST_FILE"
-    print -s "flutter test $TEST_FILE"
-    flutter test "$TEST_FILE"
-}
 
 function yt() {
     youtube-dl "$1" -f 'bestvideo[ext!=webm][width<=2560]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mp4
@@ -112,10 +83,3 @@ function vdek {
     ssh vdek -t "cd \$HOME$result; exec \$SHELL --login"
 }
 
-function fr() {
-    if [[ -f ./scripts/flutter_run.sh ]]; then
-        ./scripts/flutter_run.sh "$@"
-    else
-        ./flutterw run "$@"
-    fi
-}
