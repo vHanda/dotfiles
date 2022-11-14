@@ -41,25 +41,10 @@ set nobackup " No backup~ files
 
 set history=100   " remember 100 lines of command history
 
-" Color Scheme
-"set t_Co=256
-
 set fillchars=vert:\ ,fold:\ " <- trailing space
 
 " Ctrl-S to save
 nnoremap <silent> <C-S> :if expand("%") == ""<CR>browse confirm w<CR>else<CR>confirm w<CR>endif<CR>
-
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-"nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-"nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-" Use Ctrl-direction to move between windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
 
 syntax on
 filetype plugin indent on
