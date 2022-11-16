@@ -1,6 +1,6 @@
 export GOPATH=$HOME/go
 fish_add_path /usr/local/opt/go/libexec/bin
-fish_add_path $GOPATH/bin
+fish_add_path $(go env GOPATH)/bin
 
 function gr
     set COUNT `ls -1 *.go 2>/dev/null | wc -l`
