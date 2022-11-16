@@ -1,0 +1,11 @@
+Host vdek
+  HostName vdek.local
+  User vishesh
+
+Host gj
+  HostName 176.9.151.176
+  User vhanda
+
+Host pi
+  HostName pi.local
+  User root
