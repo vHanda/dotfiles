@@ -42,3 +42,5 @@ export LANG=en_US.UTF-8
 # }
 
 fish_add_path -p /usr/local/opt/coreutils/libexec/gnubin
+
+alias cz=chezmoi
