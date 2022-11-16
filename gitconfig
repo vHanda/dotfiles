@@ -1,9 +1,19 @@
 [user]
-	name = Vishesh Handa
-	email = me@vhanda.in
+name = Vishesh Handa
+email = me@vhanda.in
 
 [alias]
-	co = checkout
-	chp = cherry-pick
+co = checkout
+chp = cherry-pick
+sw = switch
+re = restore
+
 [core]
-	excludesfile = ~/.gitignore
+excludesfile = ~/.gitignore
+ignorecase = false
+
+[pull]
+rebase = true
+
+[init]
+defaultBranch = main
