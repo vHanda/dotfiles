@@ -3,7 +3,7 @@ function vdek
 
     set old_home "$HOME"
     set new_dir "$(pwd)"
-    set result$(pwd | sed "s#$old_home##")
+    set r $(pwd | sed "s#$old_home##")
 
-    ssh vdek -t "cd \$HOME$result; exec \$SHELL --login"
+    ssh vdek -t "cd \$HOME$r; exec \$SHELL --login"
 end
