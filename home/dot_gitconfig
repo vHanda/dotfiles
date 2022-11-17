@@ -1,19 +1,23 @@
 [user]
-name = Vishesh Handa
-email = me@vhanda.in
+    name = Vishesh Handa
+    email = me@vhanda.in
 
 [alias]
-co = checkout
-chp = cherry-pick
-sw = switch
-re = restore
+    co = checkout
+    chp = cherry-pick
+    sw = switch
+    re = restore
 
 [core]
-excludesfile = ~/.gitignore
-ignorecase = false
+    excludesfile = ~/.gitignore
+    ignorecase = false
+    attributesfile = ~/.gitattributes
 
 [pull]
-rebase = true
+    rebase = true
 
 [init]
-defaultBranch = main
+    defaultBranch = main
+
+[diff "image"]
+    command = $HOME/src/git-diff-image/git_diff_image
