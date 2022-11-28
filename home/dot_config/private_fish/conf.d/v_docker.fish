@@ -1,31 +1,31 @@
 
 function getContainerName
-    if [[ -z $argv ]]
-        set CONTAINER`dps | fzf`
+    if test -z $argv
+        set CONTAINER $(dps | fzf)
     else
-        set CONTAINER `dps | fzf -1 -q $argv`
+        set CONTAINER $(dps | fzf -1 -q $argv)
     end
 
     echo $CONTAINER
 end
 
 function dk
-    set CONTAINER `getContainerName $argv`
+    set CONTAINER $(getContainerName $argv)
     docker kill $CONTAINER
 end
 
 function dl
-    set CONTAINER `getContainerName $argv`
+    set CONTAINER $(getContainerName $argv)
     docker logs --tail=500 $CONTAINER
 end
 
 function dlf
-    set CONTAINER `getContainerName $argv`
+    set CONTAINER $(getContainerName $argv)
     docker logs --tail=500 -f $CONTAINER
 end
 
 function dps
-    if [ -z "$argv" ]
+    if test -z "$argv"
         docker ps | awk '{ print $NF }' | tail -n +2
     else
         docker ps | awk '{ print $NF }' | tail -n +2 | grep --color=always -i $argv
@@ -33,7 +33,7 @@ function dps
 end
 
 function de
-    set CONTAINER `getContainerName $argv`
+    set CONTAINER $(getContainerName $argv)
     docker exec -ti $CONTAINER bash
 end
 
