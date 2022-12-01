@@ -34,7 +34,13 @@ end
 
 function de
     set CONTAINER $(getContainerName $argv)
-    docker exec -ti $CONTAINER bash
+    if docker exec -it $CONTAINER fish --version &>/dev/null
+        docker exec -it $CONTAINER fish
+    else if docker exec -it $CONTAINER bash --version &>/dev/null
+        docker exec -ti $CONTAINER bash
+    else
+        docker exec -ti $CONTAINER sh
+    end
 end
 
 function dstop-all
