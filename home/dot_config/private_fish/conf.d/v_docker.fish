@@ -34,13 +34,43 @@ end
 
 function de
     set CONTAINER $(getContainerName $argv)
-    if docker exec -it $CONTAINER fish --version &>/dev/null
-        docker exec -it $CONTAINER fish
-    else if docker exec -it $CONTAINER bash --version &>/dev/null
-        docker exec -ti $CONTAINER bash
+    set SHELL $(getContainerShell $CONTAINER)
+    set WD $(getContainerWorkingDir $CONTAINER)
+
+    if test $status -eq 0
+        docker exec -it -w $WD $CONTAINER $SHELL
     else
-        docker exec -ti $CONTAINER sh
+        docker exec -it $CONTAINER $SHELL
     end
+end
+
+function getContainerShell
+    set CONTAINER $(getContainerName $argv)
+    if docker exec -it $CONTAINER fish --version &>/dev/null
+        echo fish
+    else if docker exec -it $CONTAINER bash --version &>/dev/null
+        echo bash
+    else
+        echo sh
+    end
+end
+
+function getContainerWorkingDir
+    set CONTAINER $(getContainerName $argv)
+
+    set WORKSPACE $(docker exec -it $CONTAINER ls /workspaces 2>&1)
+    if test $status -eq 0
+        set WORKSPACE $(string trim $WORKSPACE)
+        echo "/workspaces/$WORKSPACE"
+        return 0
+    end
+
+    if docker exec -it $CONTAINER ls /code &>/dev/null
+        echo /code
+        return 0
+    end
+
+    return 1
 end
 
 function dstop-all
