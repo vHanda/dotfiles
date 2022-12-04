@@ -41,6 +41,14 @@ export LANG=en_US.UTF-8
 #     ls --color=auto
 # }
 
+{{ if eq .chezmoi.os "darwin" }}
+
 fish_add_path -p /usr/local/opt/coreutils/libexec/gnubin
+fish_add_path /opt/local/bin
+fish_add_path /opt/local/sbin
+
+{{ else if eq .chezmoi.os "linux" }}
+
+{{ end }}
 
 alias cz=chezmoi
