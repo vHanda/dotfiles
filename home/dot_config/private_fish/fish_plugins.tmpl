@@ -4,5 +4,7 @@ jethrokuan/z
 franciscolourenco/done
 jorgebucaran/autopair.fish
 danhper/fish-ssh-agent
-{{ if eq .chezmoi.os "darwin" }}lilyball/nix-env.fish
-{{ else if eq .chezmoi.os "linux" }}{{ end }}
+{{- if eq .chezmoi.os "darwin" }}
+lilyball/nix-env.fish
+{{ else if eq .chezmoi.os "linux" }}
+{{ end }}
