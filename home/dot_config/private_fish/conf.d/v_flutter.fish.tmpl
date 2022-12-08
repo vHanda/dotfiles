@@ -13,6 +13,14 @@ fish_add_path $ANDROID_SDK_ROOT/emulator
 fish_add_path $ANDROID_SDK_ROOT/tools
 fish_add_path $ANDROID_SDK_ROOT/platform-tools
 
+# Ruby
+fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin
+fish_add_path /usr/local/opt/ruby/bin
+fish_add_path $HOME/.gem/ruby/3.0.0/bin
+fish_add_path $HOME/.gem/ruby/2.6.0/bin
+fish_add_path $HOME/.gem/bin
+fish_add_path $HOME/.fastlane/bin
+
 {{ else if eq .chezmoi.os "linux" }}
 
 export CHROME_EXECUTABLE=google-chrome-stable
