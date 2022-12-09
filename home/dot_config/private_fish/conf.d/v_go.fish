@@ -3,7 +3,7 @@ fish_add_path /usr/local/opt/go/libexec/bin
 fish_add_path $(go env GOPATH)/bin
 
 function gr
-    set COUNT `ls -1 *.go 2>/dev/null | wc -l`
+    set COUNT $(ls -1 *.go 2>/dev/null | wc -l)
     if [[ $COUNT == 0 ]]
         if [ -d cmd ]
             cd cmd/consumer
@@ -14,7 +14,7 @@ function gr
     end
 
     pwd
-    EXE_NAME=`basename $PWD`
+    set EXE_NAME $(basename $PWD)
 
     time go build
     if [ $status -eq 0 ]
