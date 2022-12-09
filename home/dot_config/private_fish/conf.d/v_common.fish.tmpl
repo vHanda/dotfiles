@@ -16,13 +16,14 @@ alias cls='printf "\033c"'
 alias cat='bat --paging never --style=plain --wrap never'
 
 function mk
-    mkdir -p "$1" && cd "$1"
+    set dirName $argv[1]
+    mkdir -p "$dirName" && cd "$dirName"
 end
 
 function rp
-    set FROM $1
-    set TO $2
-    echo "Replacing $1 for $2"
+    set FROM $argv[1]
+    set TO $argv[2]
+    echo "Replacing $FROM for $TO"
     find . -type f -not -path './node_modules/*' -not -path '*/\.*' -exec sed -i -e s/$FROM/$TO/g {} \;
 end
 
