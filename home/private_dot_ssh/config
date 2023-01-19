@@ -17,5 +17,5 @@ Host vdek-ext
 
 Host pi-ext
   HostName bcn.vhanda.in
-  User vishesh
+  User root
   Port 22
