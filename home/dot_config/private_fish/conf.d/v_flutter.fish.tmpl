@@ -48,6 +48,17 @@ function __dart_getTestFiles
     echo $FILE_NAME
 end
 
+function __add_history_entry
+  begin
+    flock 1
+    and echo -- '- cmd:' (
+      string replace -- \n \\n (string join ' ' $argv) | string replace \\ \\\\
+    )
+    and date +'  when: %s'
+  end >> $__fish_user_data_dir/fish_history
+  and history merge
+end
+
 function dt
     set TEST_FILE $(__dart_getTestFiles $argv)
     if test -z "$TEST_FILE"
@@ -55,7 +66,7 @@ function dt
     end
 
     echo "dart test $TEST_FILE"
-    print -s "dart test $TEST_FILE"
+    __add_history_entry "dart test $TEST_FILE"
     dart test "$TEST_FILE"
 end
 
@@ -66,6 +77,6 @@ function ft
     end
 
     echo "flutter test $TEST_FILE"
-    print -s "flutter test $TEST_FILE"
+    __add_history_entry "flutter test $TEST_FILE"
     flutter test "$TEST_FILE"
 end
