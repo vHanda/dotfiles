@@ -1,3 +1,10 @@
+function _docker
+    if groups | grep -q docker
+        docker $argv
+    else
+        sudo docker $argv
+    end
+end
 
 function getContainerName
     if test -z $argv
@@ -11,24 +18,24 @@ end
 
 function dk
     set CONTAINER $(getContainerName $argv)
-    docker kill $CONTAINER
+    _docker kill $CONTAINER
 end
 
 function dl
     set CONTAINER $(getContainerName $argv)
-    docker logs --tail=500 $CONTAINER
+    _docker logs --tail=500 $CONTAINER
 end
 
 function dlf
     set CONTAINER $(getContainerName $argv)
-    docker logs --tail=500 -f $CONTAINER
+    _docker logs --tail=500 -f $CONTAINER
 end
 
 function dps
     if test -z "$argv"
-        docker ps | awk '{ print $NF }' | tail -n +2
+        _docker ps | awk '{ print $NF }' | tail -n +2
     else
-        docker ps | awk '{ print $NF }' | tail -n +2 | grep --color=always -i $argv
+        _docker ps | awk '{ print $NF }' | tail -n +2 | grep --color=always -i $argv
     end
 end
 
@@ -38,17 +45,17 @@ function de
     set WD $(getContainerWorkingDir $CONTAINER)
 
     if test $status -eq 0
-        docker exec -it -w $WD $CONTAINER $SHELL
+        _docker exec -it -w $WD $CONTAINER $SHELL
     else
-        docker exec -it $CONTAINER $SHELL
+        _docker exec -it $CONTAINER $SHELL
     end
 end
 
 function getContainerShell
     set CONTAINER $(getContainerName $argv)
-    if docker exec -it $CONTAINER fish --version &>/dev/null
+    if _docker exec -it $CONTAINER fish --version &>/dev/null
         echo fish
-    else if docker exec -it $CONTAINER bash --version &>/dev/null
+    else if _docker exec -it $CONTAINER bash --version &>/dev/null
         echo bash
     else
         echo sh
@@ -65,7 +72,7 @@ function getContainerWorkingDir
         return 0
     end
 
-    if docker exec -it $CONTAINER ls /code &>/dev/null
+    if _docker exec -it $CONTAINER ls /code &>/dev/null
         echo /code
         return 0
     end
@@ -74,13 +81,13 @@ function getContainerWorkingDir
 end
 
 function dstop-all
-    docker stop $(docker ps -a -q)
+    _docker stop $(_docker ps -a -q)
 end
 
 function dkill-all
-    docker kill $(docker ps -a -q)
+    _docker kill $(_docker ps -a -q)
 end
 
 function drm-all
-    docker rm $(docker ps -a -q)
+    _docker rm $(_docker ps -a -q)
 end
