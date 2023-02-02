@@ -6,6 +6,10 @@ Host gj
   HostName 176.9.151.176
   User vhanda
 
+Host vovh
+  HostName 193.70.80.213
+  User vishesh
+
 Host pi
   HostName pi.local
   User root
