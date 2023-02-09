@@ -1,8 +1,11 @@
 #!/usr/bin/env fish
 
+if test -d "$HOME/src/flutter/flutter"
+    fish_add_path $HOME/src/flutter/flutter/bin
+    fish_add_path $HOME/src/flutter/flutter/bin/cache/dart-sdk/bin
+end
+
 {{ if eq .chezmoi.os "darwin" }}
-fish_add_path $HOME/src/flutter/flutter/bin
-fish_add_path $HOME/src/flutter/flutter/bin/cache/dart-sdk/bin
 
 export NDK="$HOME/Library/Android/sdk/ndk-bundle"
 export ANDROID_HOME=$HOME/Library/Android/sdk
