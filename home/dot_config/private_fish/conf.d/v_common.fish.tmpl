@@ -44,6 +44,7 @@ export LANG=en_US.UTF-8
 
 {{ if eq .chezmoi.os "darwin" }}
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
 fish_add_path -p /usr/local/opt/coreutils/libexec/gnubin
 fish_add_path /opt/local/bin
 fish_add_path /opt/local/sbin
