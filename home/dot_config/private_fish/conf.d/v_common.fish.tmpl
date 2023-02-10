@@ -13,7 +13,14 @@ alias a='ag -i'
 
 
 alias cls='printf "\033c"'
-alias cat='bat --paging never --style=plain --wrap never'
+
+function cat
+    if type -q bat
+        bat --paging never --style=plain --wrap never $argv
+    else
+        cat $argv
+    end
+end
 
 function mk
     set dirName $argv[1]
