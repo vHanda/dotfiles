@@ -1,5 +1,8 @@
 function _docker
-    if groups | grep -q docker
+    set -l os (uname)
+    if test "$os" = Darwin
+        docker $argv
+    else if groups | grep -q docker
         docker $argv
     else
         sudo docker $argv
