@@ -21,3 +21,5 @@
 
 [diff "image"]
     command = $HOME/src/git-diff-image/git_diff_image
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
