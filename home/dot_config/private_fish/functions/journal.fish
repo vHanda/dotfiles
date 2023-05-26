@@ -1,5 +1,5 @@
 function journal
-    set TIME $(date --iso-8601=seconds)
+    set TIME $(date +%Y-%m-%dT%H:%M:%S%z)
     set FILE "$HOME/notes/Journal/$TIME.md"
     touch "$FILE"
 
