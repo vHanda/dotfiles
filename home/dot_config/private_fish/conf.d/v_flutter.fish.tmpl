@@ -27,7 +27,7 @@ fish_add_path $HOME/.fastlane/bin
 {{ else if eq .chezmoi.os "linux" }}
 
 export CHROME_EXECUTABLE=google-chrome-stable
-export ANDROID_HOME="$HOME/Android"
+export ANDROID_HOME="/opt/android-sdk"
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
 
 fish_add_path /opt/android-sdk/cmdline-tools/latest-2/bin
