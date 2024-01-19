@@ -58,6 +58,8 @@ fish_add_path /opt/local/sbin
 
 {{ else if eq .chezmoi.os "linux" }}
 
+fish_add_path $HOME/.local/bin
+
 {{ end }}
 
 alias cz=chezmoi
