@@ -16,5 +16,5 @@ function gp
 end
 
 function gpf
-    git push origin $(git branch --show-current) --force
+    git push origin $(git branch --show-current) --force-with-lease
 end
