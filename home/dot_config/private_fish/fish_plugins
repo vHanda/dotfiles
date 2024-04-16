@@ -7,4 +7,5 @@ danhper/fish-ssh-agent
 gazorby/fish-abbreviation-tips
 lilyball/nix-env.fish
 halostatue/fish-direnv
+jorgebucaran/nvm.fish
 
