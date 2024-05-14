@@ -5,9 +5,13 @@ import time
 
 start_time = time.time()
 
+# Colors
+grey_color = "\033[90m"
+reset_color = "\033[0m"
+
 try:
     elapsed_time = time.time() - start_time
-    sys.stdout.buffer.write(f"\033[90m{elapsed_time:.2f}  -- BEGIN\033[0m\n".encode())
+    sys.stdout.buffer.write(f"{grey_color}{elapsed_time:.2f}  -- BEGIN{reset_color}\n".encode())
     sys.stdout.buffer.flush()
 
     while True:
@@ -15,12 +19,12 @@ try:
         if not line:
             break
         elapsed_time = time.time() - start_time
-        sys.stdout.buffer.write(f"\033[90m{elapsed_time:.2f}>\033[0m ".encode())
+        sys.stdout.buffer.write(f"{grey_color}{elapsed_time:.2f}>{reset_color} ".encode())
         sys.stdout.buffer.write(line)
         sys.stdout.buffer.flush()
 except KeyboardInterrupt:
     pass
 finally:
     elapsed_time = time.time() - start_time
-    sys.stdout.buffer.write(f"\033[90m{elapsed_time:.2f}  -- END\033[0m\n".encode())
+    sys.stdout.buffer.write(f"{grey_color}{elapsed_time:.2f}  -- END{reset_color}\n".encode())
     sys.stdout.buffer.flush()
