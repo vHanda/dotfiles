@@ -1,13 +1,11 @@
 function devlog
     # set fish_trace 1
     set DATE $(date --iso-8601)
-    set FILE "$HOME/notes/DevLog/$DATE.md"
+    set FILE "$HOME/notes/GoGo/DevLog/$DATE.md"
 
     if not test -e "$FILE"
         echo "Creating $FILE"
-        echo "# DevLog $DATE" >> $FILE
-        echo >>$FILE
-        echo "## Medl" >>$FILE
+        echo "# DevLog $DATE" >>$FILE
         echo >>$FILE
     else
         echo "Opening $FILE"
