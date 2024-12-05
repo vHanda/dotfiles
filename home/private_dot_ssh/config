@@ -2,24 +2,14 @@ Host vdek
   HostName vdek.local
   User vishesh
 
-Host gj
-  HostName 176.9.151.176
-  User vhanda
-
-Host vovh
-  HostName 193.70.80.213
-  User vishesh
-
 Host pi
   HostName pi.local
   User root
 
-Host vdek-ext
-  HostName bcn.vhanda.in
+Host vdek-wg
+  HostName 10.0.0.135
   User vishesh
-  Port 2200
 
-Host pi-ext
-  HostName bcn.vhanda.in
+Host pi-wg
+  HostName 10.0.0.142
   User root
-  Port 22
