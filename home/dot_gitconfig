@@ -21,3 +21,5 @@
 
 [diff "image"]
     command = $HOME/src/git-diff-image/git_diff_image
+[diff]
+	noprefix = true
