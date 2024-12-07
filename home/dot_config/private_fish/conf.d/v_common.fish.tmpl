@@ -65,3 +65,7 @@ fish_add_path $HOME/.local/bin
 alias cz=chezmoi
 
 export NIXPKGS_ALLOW_UNFREE=1
+
+if status is-interactive
+    atuin init fish --disable-up-arrow | source
+end
