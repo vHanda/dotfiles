@@ -2,14 +2,18 @@ Host vdek
   HostName vdek.local
   User vishesh
 
-Host pi
-  HostName pi.local
-  User root
+Host deck
+  HostName steamdeck.local
+  User deck
 
-Host vdek-wg
-  HostName 10.0.0.135
+Host vmpc
+  HostName 192.168.1.160
   User vishesh
 
-Host pi-wg
-  HostName 10.0.0.142
-  User root
+Host vdek-wg
+  HostName 10.0.0.4
+  User vishesh
+
+Host vmpc-wg
+  HostName 10.0.0.3
+  User vishesh
