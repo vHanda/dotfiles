@@ -1,3 +1,8 @@
+# Add DevBox
+if type -q devbox
+    eval "$(devbox global shellenv)"
+end
+
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -9,18 +14,9 @@ alias ll='ls -lh'
 
 # Convenient shortcuts
 alias g='grep -i'
-alias a='ag -i'
-
+alias bat='bat --paging never --style=plain --wrap never'
 
 alias cls='printf "\033c"'
-
-function cat
-    if type -q bat
-        bat --paging never --style=plain --wrap never $argv
-    else
-        cat $argv
-    end
-end
 
 function mk
     set dirName $argv[1]
@@ -35,19 +31,8 @@ function rp
 end
 
 
-function yt
-    youtube-dl "$1" -f 'bestvideo[ext!=webm][width<=2560]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mp4
-end
-
 export EDITOR='vim'
 export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# Auto call 'ls' after cd
-# function chpwd() {
-#     emulate -L zsh
-#     ls --color=auto
-# }
 
 {{ if eq .chezmoi.os "darwin" }}
 
