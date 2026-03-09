@@ -15,7 +15,8 @@
     "delta@latest",
     "gnused@latest",
     "bat@latest",
-    "codex@latest"
+    "codex@latest",
+    "tree@latest"
   ],
   "shell": {
     "init_hook": [
