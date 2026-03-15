@@ -52,3 +52,20 @@ if vim.g.neovide then
   vim.keymap.set("v", copy_key, copy, { silent = true, desc = "Copy" })
   vim.keymap.set({ "n", "i", "v", "c", "t" }, paste_key, paste, { silent = true, desc = "Paste" })
 end
+
+-- Beancount
+vim.filetype.add({
+  extension = {
+    beancount = "beancount",
+    bean = "beancount",
+  },
+})
+
+-- NvChad themes seem to overwrite the terminal colors
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    for i = 0, 15 do
+      vim.g["terminal_color_" .. i] = nil
+    end
+  end,
+})
