@@ -36,10 +36,10 @@ vim.schedule(function()
   require "mappings"
 end)
 
--- Enable save / copy / paste in neovide
 if vim.g.neovide then
   local is_macos = vim.uv.os_uname().sysname == "Darwin"
 
+  -- Enable save / copy / paste in neovide
   local save_key  = is_macos and "<D-s>" or "<C-S-s>"
   local copy_key  = is_macos and "<D-c>" or "<C-S-c>"
   local paste_key = is_macos and "<D-v>" or "<C-S-v>"
@@ -51,6 +51,11 @@ if vim.g.neovide then
   vim.keymap.set({ "n", "i", "v" }, save_key, save, { desc = "Save" })
   vim.keymap.set("v", copy_key, copy, { silent = true, desc = "Copy" })
   vim.keymap.set({ "n", "i", "v", "c", "t" }, paste_key, paste, { silent = true, desc = "Paste" })
+
+  -- Custom Options
+  vim.g.neovide_cursor_animation_length = 0.03
+  vim.g.neovide_cursor_short_animation_length = 0.01
+  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
 end
 
 -- Beancount
