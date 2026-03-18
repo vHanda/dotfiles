@@ -74,3 +74,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end
   end,
 })
+
+
+-- Custom UI stuff (Ctrl + K)
+vim.o.winborder = "rounded"
+
+
+-- Flutter
+require("flutter-tools").setup {}
