@@ -41,3 +41,14 @@ vim.lsp.enable('beancount')
 -- You can also add `:lua vim.lsp.set_log_level("debug")`
 -- :=vim.lsp.log_levels -> :lua print(vim.inspect(vim.lsp.log_levels)))
 -- Check filetype via: set filetype?
+
+
+
+vim.lsp.config('ts_ls', {
+  -- commands = { "typescript-language-server", "--stdio" },
+  -- root_markers = { "main.bean", ".git" },
+  init_options = {
+      hostInfo = "neovim"
+  },
+})
+vim.lsp.enable('ts_ls')

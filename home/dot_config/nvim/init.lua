@@ -82,3 +82,17 @@ vim.o.winborder = "rounded"
 
 -- Flutter
 require("flutter-tools").setup {}
+
+-- Terminal Horizontal scrolling is weird
+-- Maybe this should be set globally?
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})
+
+
+-- Visual WhiteSpace theme
+vim.api.nvim_set_hl(0, "VisualNonText", { fg = "#5D5F71", bg = "#24282d"})
