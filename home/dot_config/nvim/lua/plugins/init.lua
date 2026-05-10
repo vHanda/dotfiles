@@ -96,4 +96,53 @@ return {
     end,
     ft = { "javascript" },
   },
+
+  {
+    "rachartier/tiny-cmdline.nvim",
+    lazy = false,
+    init = function()
+      vim.o.cmdheight = 0
+      require("vim._core.ui2").enable({})
+    end,
+    config = function()
+      require("tiny-cmdline").setup({
+        width = { value = "70%" },
+        position = {
+          x = "50%",
+          y = "50%",
+        },
+      })
+    end,
+  },
+
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      -- log_level = 'debug',
+
+      pre_save_cmds = {
+        function()
+          local ok, nvim_tree = pcall(require, "nvim-tree.api")
+          if ok then nvim_tree.tree.close() end
+        end,
+      },
+
+      post_restore_cmds = {
+        function()
+          local ok, nvim_tree = pcall(require, "nvim-tree.api")
+          if ok then
+            nvim_tree.tree.open()
+            nvim_tree.tree.change_root(vim.fn.getcwd())
+            nvim_tree.tree.reload()
+          end
+        end,
+      },
+    },
+  }
 }
