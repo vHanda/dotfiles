@@ -142,6 +142,17 @@ return {
             nvim_tree.tree.reload()
           end
         end,
+
+        function()
+          local ok, gitsigns = pcall(require, "gitsigns")
+          if ok then
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.api.nvim_buf_is_loaded(buf) then
+                gitsigns.attach(buf)
+              end
+            end
+          end
+        end,
       },
     },
   }
