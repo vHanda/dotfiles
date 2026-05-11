@@ -16,7 +16,10 @@
     "gnused@latest",
     "bat@latest",
     "codex@latest",
-    "tree@latest"
+    "tree@latest",
+    "tree-sitter@latest",
+    "watch@latest",
+    "nmap@latest"
   ],
   "shell": {
     "init_hook": [
