@@ -5,6 +5,7 @@ local options = {
     -- css = { "prettier" },
     -- html = { "prettier" },
     javascript = { "prettierd", "prettier", stop_after_first = true },
+    dart = { "dart_format" },
   },
 
   format_on_save = {
