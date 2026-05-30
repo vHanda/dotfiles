@@ -78,6 +78,13 @@ return {
 	-- 	},
 	-- },
 	--
+	{
+		"kevinhwang91/nvim-hlslens",
+		event = "BufReadPost",
+		config = function()
+			require("hlslens").setup()
+		end,
+	},
 
 	{
 		"petertriho/nvim-scrollbar",
@@ -91,7 +98,7 @@ return {
 				show = true,
 				hide_if_all_visible = false,
 				handlers = {
-					cursor = true,
+					cursor = false,
 					diagnostic = true,
 					gitsigns = true,
 					handle = true,
