@@ -1,5 +1,18 @@
 require("nvchad.configs.lspconfig").defaults()
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+			buffer = ev.buf,
+			desc = "Go to definition",
+		})
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {
+			buffer = ev.buf,
+			desc = "Go to declaration",
+		})
+	end,
+})
+
 local servers = { "html", "cssls" }
 vim.lsp.enable(servers)
 
