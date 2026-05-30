@@ -1,98 +1,117 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46/"
 vim.g.mapleader = " "
 
+--
+-- Scrolling
+--
+vim.opt.mouse = "a"
+vim.opt.mousescroll = "ver:2,hor:1"
+vim.opt.smoothscroll = true
+vim.opt.display:append("lastline")
+
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+--
 -- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+--
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+	local repo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require "configs.lazy"
+local lazy_config = require("configs.lazy")
 
 -- load plugins
 require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-  },
+	{
+		"NvChad/NvChad",
+		lazy = false,
+		branch = "v2.5",
+		import = "nvchad.plugins",
+	},
 
-  { import = "plugins" },
+	{ import = "plugins" },
 }, lazy_config)
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require "options"
-require "autocmds"
+require("options")
+require("autocmds")
 
 vim.schedule(function()
-  require "mappings"
+	require("mappings")
 end)
 
 if vim.g.neovide then
-  local is_macos = vim.uv.os_uname().sysname == "Darwin"
+	local is_macos = vim.uv.os_uname().sysname == "Darwin"
 
-  -- Enable save / copy / paste in neovide
-  local save_key  = is_macos and "<D-s>" or "<C-S-s>"
-  local copy_key  = is_macos and "<D-c>" or "<C-S-c>"
-  local paste_key = is_macos and "<D-v>" or "<C-S-v>"
+	-- Enable save / copy / paste in neovide
+	local save_key = is_macos and "<D-s>" or "<C-S-s>"
+	local copy_key = is_macos and "<D-c>" or "<C-S-c>"
+	local paste_key = is_macos and "<D-v>" or "<C-S-v>"
 
-  local function save() vim.cmd.write() end
-  local function copy() vim.cmd([[normal! "+y]]) end
-  local function paste() vim.api.nvim_paste(vim.fn.getreg("+"), true, -1) end
+	local function save()
+		vim.cmd.write()
+	end
+	local function copy()
+		vim.cmd([[normal! "+y]])
+	end
+	local function paste()
+		vim.api.nvim_paste(vim.fn.getreg("+"), true, -1)
+	end
 
-  vim.keymap.set({ "n", "i", "v" }, save_key, save, { desc = "Save" })
-  vim.keymap.set("v", copy_key, copy, { silent = true, desc = "Copy" })
-  vim.keymap.set({ "n", "i", "v", "c", "t" }, paste_key, paste, { silent = true, desc = "Paste" })
+	vim.keymap.set({ "n", "i", "v" }, save_key, save, { desc = "Save" })
+	vim.keymap.set("v", copy_key, copy, { silent = true, desc = "Copy" })
+	vim.keymap.set({ "n", "i", "v", "c", "t" }, paste_key, paste, { silent = true, desc = "Paste" })
 
-  -- Custom Options
-  vim.g.neovide_cursor_animation_length = 0.03
-  vim.g.neovide_cursor_short_animation_length = 0.01
-  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
+	-- Custom Options
+	vim.g.neovide_cursor_animation_length = 0.03
+	vim.g.neovide_cursor_short_animation_length = 0.01
+	vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12"
+
+	-- Scrolling
+	vim.g.neovide_scroll_animation_length = 0.08
 end
 
 -- Beancount
 vim.filetype.add({
-  extension = {
-    beancount = "beancount",
-    bean = "beancount",
-  },
+	extension = {
+		beancount = "beancount",
+		bean = "beancount",
+	},
 })
 
 -- NvChad themes seem to overwrite the terminal colors
 vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    for i = 0, 15 do
-      vim.g["terminal_color_" .. i] = nil
-    end
-  end,
+	callback = function()
+		for i = 0, 15 do
+			vim.g["terminal_color_" .. i] = nil
+		end
+	end,
 })
-
 
 -- Custom UI stuff (Ctrl + K)
 vim.o.winborder = "rounded"
 
-
 -- Flutter
-require("flutter-tools").setup {}
+require("flutter-tools").setup({})
 
 -- Terminal Horizontal scrolling is weird
 -- Maybe this should be set globally?
 vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-    vim.opt_local.breakindent = true
-  end,
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+		vim.opt_local.breakindent = true
+	end,
 })
 
-
 -- Visual WhiteSpace theme
-vim.api.nvim_set_hl(0, "VisualNonText", { fg = "#5D5F71", bg = "#24282d"})
+vim.api.nvim_set_hl(0, "VisualNonText", { fg = "#5D5F71", bg = "#24282d" })

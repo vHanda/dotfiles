@@ -51,6 +51,20 @@ return {
 		end,
 	},
 
+	{
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			-- Uncomment whichever supported plugin(s) you use
+			"nvim-tree/nvim-tree.lua",
+			-- "nvim-neo-tree/neo-tree.nvim",
+			-- "simonmclean/triptych.nvim"
+		},
+		config = function()
+			require("lsp-file-operations").setup()
+		end,
+	},
+
 	-- test new blink
 	-- { import = "nvchad.blink.lazyspec" },
 
@@ -64,6 +78,41 @@ return {
 	-- 	},
 	-- },
 	--
+
+	{
+		"petertriho/nvim-scrollbar",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+			"kevinhwang91/nvim-hlslens", -- optional, for search marks
+		},
+		config = function()
+			require("scrollbar").setup({
+				show = true,
+				hide_if_all_visible = false,
+				handlers = {
+					cursor = true,
+					diagnostic = true,
+					gitsigns = true,
+					handle = true,
+					search = true,
+				},
+				excluded_filetypes = {
+					"prompt",
+					"TelescopePrompt",
+					"noice",
+					"neo-tree",
+					"NvimTree",
+					"lazy",
+					"mason",
+				},
+			})
+
+			require("scrollbar.handlers.gitsigns").setup()
+			require("scrollbar.handlers.search").setup()
+		end,
+	},
+
 	{
 		"folke/trouble.nvim",
 		opts = {},

@@ -6,13 +6,13 @@
 local M = {}
 
 M.base46 = {
-  theme = "pastelDark",
-  transparency = true,
+	theme = "penumbra_dark",
+	transparency = true,
 
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
+	-- hl_override = {
+	-- 	Comment = { italic = true },
+	-- 	["@comment"] = { italic = true },
+	-- },
 }
 
 -- M.nvdash = { load_on_startup = true }
