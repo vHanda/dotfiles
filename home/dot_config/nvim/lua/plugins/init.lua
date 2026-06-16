@@ -1,4 +1,5 @@
 return {
+	-- Used to format the code the code - call prettier / gofmt / etc
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
@@ -31,6 +32,7 @@ return {
 					local util = require("lspconfig.util")
 
 					-- Walk upward until we find a directory containing both pubspec.yaml and .git
+					-- There is needed for pub workspaces
 					local path = vim.fs.dirname(vim.fs.normalize(fname))
 					for dir in vim.fs.parents(path) do
 						if
@@ -111,7 +113,6 @@ return {
 		config = function(_, opts)
 			require("neo-tree").setup(opts)
 
-			vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<cr>")
 			vim.api.nvim_set_hl(0, "NeoTreeCursorLine", {
 				bg = "#3b4252",
 				bold = true,
@@ -119,6 +120,7 @@ return {
 		end,
 	},
 
+	-- Stickies certain lines which show the class / functions
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -129,15 +131,13 @@ return {
 		},
 	},
 
+	-- Call the LSP when we rename / move a file
 	{
 		"antosha417/nvim-lsp-file-operations",
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			-- Uncomment whichever supported plugin(s) you use
-			"nvim-tree/nvim-tree.lua",
-			-- "nvim-neo-tree/neo-tree.nvim",
-			-- "simonmclean/triptych.nvim"
+			"nvim-neo-tree/neo-tree.nvim",
 		},
 		config = function()
 			require("lsp-file-operations").setup()
@@ -156,7 +156,10 @@ return {
 	-- 		},
 	-- 	},
 	-- },
-	--
+
+	-- When searching for something it shows the number of occurances
+	-- I'd prefer a top right bar like in vscode
+	-- This also has some bugs, but it's needed for nvim-scrollbar
 	{
 		"kevinhwang91/nvim-hlslens",
 		event = "BufReadPost",
@@ -237,6 +240,8 @@ return {
 		},
 	},
 
+	-- Makes the quick-fix prettier and also allows one to edit the files directly
+	-- from the quickfix menu
 	{
 		"stevearc/quicker.nvim",
 		ft = "qf",
@@ -258,6 +263,7 @@ return {
 		ft = { "javascript" },
 	},
 
+	-- Puts the command line in the middle of the screen
 	{
 		"rachartier/tiny-cmdline.nvim",
 		lazy = false,
@@ -276,6 +282,7 @@ return {
 		end,
 	},
 
+	-- Shows the IDE style of showing this breadcrumb at the top of the file
 	{
 		"Bekaboo/dropbar.nvim",
 		lazy = false,
@@ -297,6 +304,7 @@ return {
 		end,
 	},
 
+	-- A better top open buffer bar
 	{
 		"romgrk/barbar.nvim",
 		dependencies = {
@@ -316,6 +324,7 @@ return {
 				-- Vish: restore this
 				-- NvimTree = true, -- keeps the tab bar aligned with nvim-tree
 			},
+			auto_hide = true,
 		},
 		config = function(_, opts)
 			require("barbar").setup(opts)
@@ -393,6 +402,19 @@ return {
 			-- 		end
 			-- 	end,
 			-- },
+		},
+	},
+
+	-- Terminal in the middle of the screen
+	{
+		"akinsho/toggleterm.nvim",
+		keys = { "<C-t>" }, -- or whatever key you want
+		opts = {
+			open_mapping = [[<C-t>]],
+			direction = "float",
+			float_opts = {
+				border = "curved",
+			},
 		},
 	},
 }
