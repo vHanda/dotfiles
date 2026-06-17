@@ -13,6 +13,14 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
 --
+-- Clipboard over SSH
+--
+if vim.env.SSH_TTY then
+  vim.g.clipboard = "osc52"
+  vim.opt.clipboard = "unnamedplus"
+end
+
+--
 -- bootstrap lazy and all plugins
 --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -49,6 +57,9 @@ vim.schedule(function()
 	require("mappings")
 end)
 
+--
+-- Neovide
+--
 if vim.g.neovide then
 	local is_macos = vim.uv.os_uname().sysname == "Darwin"
 
