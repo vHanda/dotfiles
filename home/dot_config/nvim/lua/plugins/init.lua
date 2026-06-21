@@ -28,8 +28,32 @@ return {
 				init_options = {
 					onlyAnalyzeProjectsWithOpenFiles = false,
 				},
+				settings = {
+					-- flutter-tools supports this directly under lsp.settings.
+					-- Keep SDK/cache out of analysis.
+					analysisExcludedFolders = {
+						vim.fn.expand("~/src/flutter/flutter/bin/cache"),
+						vim.fn.expand("~/src/flutter/flutter/packages"),
+						vim.fn.expand("~/.pub-cache"),
+					},
+				},
 				root_dir = function(fname)
 					local util = require("lspconfig.util")
+					local path = vim.fs.normalize(fname)
+
+					-- Do not start a separate dartls for Flutter SDK/cache files.
+					-- You can still jump into these files, but they won't pollute diagnostics.
+					local excluded_roots = {
+						vim.fs.normalize(vim.fn.expand("~/src/flutter/flutter/bin/cache")),
+						vim.fs.normalize(vim.fn.expand("~/src/flutter/flutter/packages")),
+						vim.fs.normalize(vim.fn.expand("~/.pub-cache")),
+					}
+
+					for _, root in ipairs(excluded_roots) do
+						if path:sub(1, #root) == root then
+							return nil
+						end
+					end
 
 					-- Walk upward until we find a directory containing both pubspec.yaml and .git
 					-- There is needed for pub workspaces
@@ -329,27 +353,32 @@ return {
 		config = function(_, opts)
 			require("barbar").setup(opts)
 
-			local function apply_highlights()
-				local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
-				local comment = vim.api.nvim_get_hl(0, { name = "Comment" })
-				local bg = normal.bg
-				local dim_fg = comment.fg
+			vim.api.nvim_set_hl(0, "BufferCurrent", { bg = "#000000", update = true })
+			vim.api.nvim_set_hl(0, "BufferCurrentIcon", { bg = "#000000", update = true })
+			vim.api.nvim_set_hl(0, "BufferCurrentSign", { bg = "#000000", update = true })
+			vim.api.nvim_set_hl(0, "BufferCurrentSignRight", { bg = "#000000", update = true })
 
-				vim.api.nvim_set_hl(0, "BufferInactive", { bg = bg, fg = dim_fg })
-				vim.api.nvim_set_hl(0, "BufferInactiveSign", { bg = bg, fg = dim_fg })
-				vim.api.nvim_set_hl(0, "BufferInactiveMod", { bg = bg, fg = dim_fg })
-				vim.api.nvim_set_hl(0, "BufferCurrent", { bg = bg })
-				vim.api.nvim_set_hl(0, "BufferCurrentSign", { bg = bg })
-				vim.api.nvim_set_hl(0, "BufferCurrentMod", { bg = bg })
-				vim.api.nvim_set_hl(0, "BufferTabpageFill", { bg = bg })
-			end
-
-			apply_highlights()
+			-- local function apply_highlights()
+			-- 	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+			-- 	local comment = vim.api.nvim_get_hl(0, { name = "Comment" })
+			-- 	local bg = normal.bg
+			-- 	local dim_fg = comment.fg
+			--
+			-- 	vim.api.nvim_set_hl(0, "BufferInactive", { bg = bg, fg = dim_fg })
+			-- 	vim.api.nvim_set_hl(0, "BufferInactiveSign", { bg = bg, fg = dim_fg })
+			-- 	vim.api.nvim_set_hl(0, "BufferInactiveMod", { bg = bg, fg = dim_fg })
+			-- 	vim.api.nvim_set_hl(0, "BufferCurrent", { bg = bg })
+			-- 	vim.api.nvim_set_hl(0, "BufferCurrentSign", { bg = bg })
+			-- 	vim.api.nvim_set_hl(0, "BufferCurrentMod", { bg = bg })
+			-- 	vim.api.nvim_set_hl(0, "BufferTabpageFill", { bg = bg })
+			-- end
+			--
+			-- apply_highlights()
 
 			-- Re-apply whenever NvChad's theme switcher changes the colorscheme
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = apply_highlights,
-			})
+			-- vim.api.nvim_create_autocmd("ColorScheme", {
+			-- 	callback = apply_highlights,
+			-- })
 		end,
 		keys = {
 			{ "<Tab>", "<cmd>BufferNext<CR>", desc = "buffer next" },

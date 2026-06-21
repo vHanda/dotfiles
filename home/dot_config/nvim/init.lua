@@ -13,12 +13,99 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
 --
--- Clipboard over SSH
+-- Clipboard
 --
 if vim.env.SSH_TTY then
   vim.g.clipboard = "osc52"
   vim.opt.clipboard = "unnamedplus"
 end
+
+-- Copy clipboard on select in the terminal
+local function add_konsole_word_chars(buf)
+  -- Konsole default WordCharacters:
+  -- : @ - . / _ ~ ? & = % + #
+  --
+  -- Use numeric ASCII forms for punctuation so Vim's 'iskeyword'
+  -- parser does not treat things like @ or - specially.
+  local konsole_chars = {
+    "58",  -- :
+    "64",  -- @ literal
+    "45",  -- -
+    "46",  -- .
+    "47",  -- /
+    -- "_" is already in the default iskeyword, but including it is harmless.
+    "_",
+    "126", -- ~
+    "63",  -- ?
+    "38",  -- &
+    "61",  -- =
+    "37",  -- %
+    "43",  -- +
+    "35",  -- #
+  }
+
+  local isk = vim.bo[buf].iskeyword
+  local parts = vim.split(isk, ",", { plain = true })
+  local seen = {}
+
+  for _, part in ipairs(parts) do
+    seen[part] = true
+  end
+
+  for _, ch in ipairs(konsole_chars) do
+    if not seen[ch] then
+      table.insert(parts, ch)
+    end
+  end
+
+  vim.bo[buf].iskeyword = table.concat(parts, ",")
+
+  -- We could also just have done something like this -
+  -- vim.bo[buf].iskeyword = "@,48-57,_,192-255,58,64,45,46,47,126,63,38,61,37,43,35"
+end
+
+local function copy_visual_selection_to_clipboard()
+  local mode = vim.fn.mode()
+
+  local lines = vim.fn.getregion(
+    vim.fn.getpos("v"),
+    vim.fn.getpos("."),
+    { type = mode }
+  )
+
+  vim.fn.setreg("+", lines, mode)
+end
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(ev)
+    add_konsole_word_chars(ev.buf)
+
+    vim.keymap.set(
+      "x",
+      "<LeftRelease>",
+      "<Cmd>lua copy_visual_selection_to_clipboard()<CR>",
+      {
+        buffer = ev.buf,
+        silent = true,
+        desc = "Copy terminal mouse selection to clipboard without leaving visual mode",
+      }
+    )
+
+    vim.keymap.set(
+      "x",
+      "<2-LeftRelease>",
+      "<Cmd>lua copy_visual_selection_to_clipboard()<CR>",
+      {
+        buffer = ev.buf,
+        silent = true,
+        desc = "Copy terminal double-click selection to clipboard",
+      }
+    )
+  end,
+})
+
+_G.copy_visual_selection_to_clipboard = copy_visual_selection_to_clipboard
+
 
 --
 -- bootstrap lazy and all plugins
